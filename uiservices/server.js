@@ -75,10 +75,24 @@ app.use((err, req, res, next) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
     console.log(`\n🚀 UI Server is running!`);
     console.log(`📱 Local:            http://localhost:${PORT}`);
     console.log(`🔌 API Backend:      ${API_BASE_URL}`);
     console.log(`🌍 Environment:      ${process.env.NODE_ENV || 'development'}`);
     console.log(`\n✨ Open http://localhost:${PORT} in your browser\n`);
+});
+
+// Handle server errors
+server.on('error', (err) => {
+    if (err.code === 'EADDRINUSE') {
+        console.error(`\n❌ Error: Port ${PORT} is already in use!`);
+        console.error(`\n💡 To fix this, you can:`);
+        console.error(`   1. Kill the process using port ${PORT}: lsof -ti:${PORT} | xargs kill`);
+        console.error(`   2. Or set a different port: PORT=3001 make dev\n`);
+        process.exit(1);
+    } else {
+        console.error('Server error:', err);
+        process.exit(1);
+    }
 });
