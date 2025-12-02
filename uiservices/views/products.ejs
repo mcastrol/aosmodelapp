@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="icon">💻</span>
+                <span class="brand-name">Computer Products Shop</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/products" class="active">Products</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container page-content">
+        <div class="page-header">
+            <div>
+                <h1>Product Catalog</h1>
+                <p class="page-subtitle">Browse and manage your inventory</p>
+            </div>
+            <a href="/products/new" class="btn btn-primary">+ Add New Product</a>
+        </div>
+
+        <div class="filters-section">
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search products...">
+                <span class="search-icon">🔍</span>
+            </div>
+
+            <div class="filter-group">
+                <label for="category-filter">Category:</label>
+                <select id="category-filter">
+                    <option value="">All Categories</option>
+                    <option value="computer">Computers</option>
+                    <option value="laptop">Laptops</option>
+                    <option value="keyboard">Keyboards</option>
+                    <option value="mouse">Mice</option>
+                    <option value="monitor">Monitors</option>
+                    <option value="disk">Storage</option>
+                    <option value="ram">RAM</option>
+                    <option value="processor">Processors</option>
+                    <option value="graphics_card">Graphics Cards</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="brand-filter">Brand:</label>
+                <select id="brand-filter">
+                    <option value="">All Brands</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="sort-filter">Sort by:</label>
+                <select id="sort-filter">
+                    <option value="name-asc">Name (A-Z)</option>
+                    <option value="name-desc">Name (Z-A)</option>
+                    <option value="price-asc">Price (Low to High)</option>
+                    <option value="price-desc">Price (High to Low)</option>
+                    <option value="stock-asc">Stock (Low to High)</option>
+                    <option value="stock-desc">Stock (High to Low)</option>
+                </select>
+            </div>
+
+            <button id="clear-filters" class="btn btn-text">Clear Filters</button>
+        </div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading products...</p>
+        </div>
+
+        <div id="error-message" class="error-message" style="display: none;"></div>
+
+        <div id="products-grid" class="products-grid"></div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            <div class="empty-icon">📦</div>
+            <h3>No products found</h3>
+            <p>Try adjusting your filters or add a new product</p>
+            <a href="/products/new" class="btn btn-primary">Add Your First Product</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Computer Products Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="modal">
+        <div class="modal-content">
+            <h3>Confirm Deletion</h3>
+            <p>Are you sure you want to delete this product?</p>
+            <div id="delete-product-info"></div>
+            <div class="modal-actions">
+                <button id="cancel-delete" class="btn btn-secondary">Cancel</button>
+                <button id="confirm-delete" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_URL = '<%= apiUrl %>';
+    </script>
+    <script src="/js/api.js"></script>
+    <script src="/js/products.js"></script>
+</body>
+</html>

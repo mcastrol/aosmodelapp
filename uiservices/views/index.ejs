@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="icon">💻</span>
+                <span class="brand-name">Computer Products Shop</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/" class="active">Home</a></li>
+                <li><a href="/products">Products</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Welcome to Computer Products Shop</h1>
+                <p class="hero-subtitle">Manage your computer products inventory with ease</p>
+
+                <div class="hero-cards">
+                    <div class="feature-card">
+                        <div class="feature-icon">📦</div>
+                        <h3>Product Management</h3>
+                        <p>Add, edit, and delete computer products</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h3>Search & Filter</h3>
+                        <p>Find products by category, brand, or name</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h3>Inventory Tracking</h3>
+                        <p>Monitor stock levels and pricing</p>
+                    </div>
+                </div>
+
+                <div class="cta-buttons">
+                    <a href="/products" class="btn btn-primary">View All Products</a>
+                    <a href="/products/new" class="btn btn-secondary">Add New Product</a>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-products">-</div>
+                        <div class="stat-label">Total Products</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-categories">-</div>
+                        <div class="stat-label">Categories</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="total-stock">-</div>
+                        <div class="stat-label">Items in Stock</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Computer Products Shop. All rights reserved.</p>
+            <p class="api-status">
+                API Status: <span id="api-status" class="status-badge">Checking...</span>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = '<%= apiUrl %>';
+    </script>
+    <script src="/js/api.js"></script>
+    <script src="/js/home.js"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <span class="icon">💻</span>
+                <span class="brand-name">Computer Products Shop</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="/">Home</a></li>
+                <li><a href="/products" class="active">Products</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container page-content">
+        <div class="form-header">
+            <a href="/products" class="back-link">← Back to Products</a>
+            <h1><%= mode === 'create' ? 'Add New Product' : 'Edit Product' %></h1>
+        </div>
+
+        <div id="loading" class="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Loading product data...</p>
+        </div>
+
+        <div id="error-message" class="error-message" style="display: none;"></div>
+
+        <form id="product-form" class="product-form">
+            <div class="form-section">
+                <h2>Basic Information</h2>
+
+                <div class="form-group">
+                    <label for="product_name">Product Name *</label>
+                    <input type="text" id="product_name" name="product_name" required
+                           placeholder="e.g., Dell XPS 15">
+                    <span class="form-hint">Maximum 200 characters</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" name="description" required rows="4"
+                              placeholder="Enter a detailed description of the product"></textarea>
+                    <span class="form-hint">Maximum 1000 characters</span>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="category">Category *</label>
+                        <select id="category" name="category" required>
+                            <option value="">Select Category</option>
+                            <option value="computer">Computer</option>
+                            <option value="laptop">Laptop</option>
+                            <option value="keyboard">Keyboard</option>
+                            <option value="mouse">Mouse</option>
+                            <option value="monitor">Monitor</option>
+                            <option value="disk">Storage (Disk)</option>
+                            <option value="ram">RAM</option>
+                            <option value="processor">Processor</option>
+                            <option value="graphics_card">Graphics Card</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="brand">Brand *</label>
+                        <input type="text" id="brand" name="brand" required
+                               placeholder="e.g., Dell">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Pricing & Inventory</h2>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="price">Price ($) *</label>
+                        <input type="number" id="price" name="price" required step="0.01" min="0.01"
+                               placeholder="0.00">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stock_quantity">Stock Quantity *</label>
+                        <input type="number" id="stock_quantity" name="stock_quantity" required min="0"
+                               placeholder="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="unit_of_measure">Unit of Measure *</label>
+                        <select id="unit_of_measure" name="unit_of_measure" required>
+                            <option value="unit">Unit</option>
+                            <option value="piece">Piece</option>
+                            <option value="box">Box</option>
+                            <option value="pack">Pack</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Specifications (Optional)</h2>
+                <p class="section-hint">Add technical specifications as key-value pairs</p>
+
+                <div id="specifications-container">
+                    <!-- Specifications will be added dynamically -->
+                </div>
+
+                <button type="button" id="add-spec" class="btn btn-text">+ Add Specification</button>
+            </div>
+
+            <div class="form-actions">
+                <a href="/products" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">
+                    <%= mode === 'create' ? 'Create Product' : 'Update Product' %>
+                </button>
+            </div>
+        </form>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Computer Products Shop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const API_URL = '<%= apiUrl %>';
+        const MODE = '<%= mode %>';
+        <% if (mode === 'edit') { %>
+        const PRODUCT_ID = '<%= productId %>';
+        <% } %>
+    </script>
+    <script src="/js/api.js"></script>
+    <script src="/js/product-form.js"></script>
+</body>
+</html>
